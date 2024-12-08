@@ -1,7 +1,5 @@
 import "./globals.css";
 import { Outfit, Poppins } from "next/font/google";
-import Navbar from "@/components/Navbar";
-import Footerb from "@/components/Footerb";
 
 const outfit = Outfit({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -18,7 +16,7 @@ const poppins = Poppins({
 
 export const metadata = {
   title: "Welcome to Habit Tracker",
-  description: "Achieve Your Goals with our Habit Tracker",
+  description: "Achieve Your New Goals with our Habit Tracker",
 };
 
 export default function RootLayout({ children }) {
