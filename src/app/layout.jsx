@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Outfit, Poppins } from "next/font/google";
+import toast, { Toaster } from "react-hot-toast";
 
 const outfit = Outfit({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -23,6 +24,37 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${outfit.variable} ${poppins.variable} antialiased`}>
+      <Toaster
+          position="top-center"
+          reverseOrder={true}
+          toastOptions={{
+            // Default options for all toasts
+            success: {
+              style: {
+                border: "1px solid #A0FFBA",
+                padding: "10px",
+                color: "#fff",
+                background: "#333F4E"
+              },
+              iconTheme: {
+                primary: "#A0FFBA",
+                secondary: "black",
+              },
+            },
+            error: {
+              style: {
+                border: "1px solid #FB5456",
+                padding: "10px",
+                color: "#fff",
+                background: "#333F4E",
+              },
+              iconTheme: {
+                primary: "#FB5456",
+                secondary: "#FFF",
+              },
+            },
+          }}
+        />
         {children}
       </body>
     </html>

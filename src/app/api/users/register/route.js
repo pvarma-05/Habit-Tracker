@@ -1,36 +1,36 @@
-import { Connect } from "@/config/config";
+import { connect } from "@/config/config";
 import User from "@/models/userModel";
-import { NextRequest, NextResponse } from "next/server";
-import bcryptjs from "bcryptjs";
+import { NextResponse } from "next/server";
 
+connect(); // Ensure database connection is established
 
-Connect()
+export async function POST(request) {
+  try {
+    const reqBody = await request.json(); // Fixed function call
+    const { name, username, email } = reqBody;
 
-export async function POST(request = NextRequest) {
-    try {
-        reqBody = await request.json
-        const { fName, lName, email } = reqBody
-        console.log(reqBody); //remove
+    console.log("Request Body:", reqBody); // For debugging, can be removed later
 
-        const user = await User.findOne({ email })
-        if (user)
-            return NextResponse.json({ error: "User Already Exists" }, { status: 400 })
-        
-        const salt = await bcryptjs.genSalt(10)
-        const hashedPassword = await bcryptjs.hash(password, salt)
-
-        const newUser = new user({
-            fName, lName, email,password:hashedPassword
-        })
-        const savedUser = await newUser.save()
-        return NextResponse.json(
-            {
-                message: "User Created Successfully",
-                success : "true",
-                savedUser
-            })
-
-    } catch (error) {
-        return NextResponse.json({ error: error.message }, { status: 500 })
+    // Check if the user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return NextResponse.json(
+        { message: "User Already Exists" },
+        { status: 400 }
+      );
     }
+
+    // Create a new user
+    const newUser = new User({ name, username, email });
+    const savedUser = await newUser.save();
+
+    return NextResponse.json({
+      message: "User Created Successfully",
+      success: true,
+      savedUser,
+    });
+  } catch (error) {
+    console.error("Error:", error.message);
+    return NextResponse.json({ error: error.message }, { status: 500 });
+  }
 }

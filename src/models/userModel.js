@@ -1,13 +1,14 @@
 import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema({
-    fName: {
+    name: {
         type: String,
         required: [true, "Please Provide a First Name"],
     },
-    lName: {
+    username: {
         type: String,
-        required: [true, "Please Provide a Last Name"],
+        required: [true, "Please Provide a uesrname"],
+        unique: true,
     },
     email: {
         type: String,
@@ -25,8 +26,8 @@ const userSchema = new mongoose.Schema({
 
     verifyToken: String,
     verifyTokenExpiry: Date,
-    forgotPasswordToken: String,
-    forgotPasswordTokenExpiry: Date,
+    // forgotPasswordToken: String,
+    // forgotPasswordTokenExpiry: Date,
 
     profilePic: {
         type: String, // URL of the profile picture

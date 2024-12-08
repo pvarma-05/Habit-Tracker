@@ -1,6 +1,5 @@
 import React from 'react'
 import Image from 'next/image'
-import toast, { Toaster } from "react-hot-toast";
 
 export const metadata = {
   title: "Habit Tracker",
@@ -9,7 +8,6 @@ export const metadata = {
 const layout = ({ children }) => {
   return (
     <section className='flex h-dvh'>
-      <div><Toaster /></div>
       <div className="w-2/5 bg-[#A0FFBA] gap-5 text-black flex flex-col justify-center items-center">
       <div className="font-outfit">
         <h1 className='text-center text-[38px] font-semibold'>Habit Tracker</h1>

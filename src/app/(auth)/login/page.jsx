@@ -12,15 +12,7 @@ export default function LoginPage() {
   })
 
   const onLogin = async()=>{
-    toast('Login Success',
-      {
-        icon: '✅',
-        style: {
-          background: '#333',
-          color: '#fff',
-        },
-      }
-    );
+    toast.success('Login Success');
   }
 
 
