@@ -13,28 +13,44 @@ export default function RegisterPage() {
     email: "",
   });
 
+  const validateEmail = (email) => {
+    // Simple email validation regex
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
   const validateForm = () => {
     if (!user.name || !user.username || !user.email) {
       toast.error("All fields are required.");
+      return false;
+    }
+    if (!validateEmail(user.email)) {
+      toast.error("Invalid email format.");
       return false;
     }
     return true;
   };
 
   const onRegister = async () => {
-    if (!validateForm()) return;
+    const toastId = toast.loading("Loading");
+    
+    if (!validateForm()) {
+      toast.dismiss(toastId);
+      return;
+    }
 
     try {
       const response = await axios.post("/api/users/register", user);
       console.log("Registration Success:", response.data);
 
-      toast.success("Registration Successful!");
+      toast.success("Registration Successful!", { id: toastId });
       router.push("/login");
     } catch (error) {
       console.error("Registration Error:", error);
 
       toast.error(
-        error.response?.data?.message || "An unexpected error occurred."
+        error.response?.data?.message || "An unexpected error occurred.",
+        { id: toastId }
       );
     }
   };

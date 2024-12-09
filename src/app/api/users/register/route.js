@@ -2,16 +2,15 @@ import { connect } from "@/config/config";
 import User from "@/models/userModel";
 import { NextResponse } from "next/server";
 
-connect(); // Ensure database connection is established
+connect(); 
 
 export async function POST(request) {
   try {
-    const reqBody = await request.json(); // Fixed function call
+    const reqBody = await request.json(); 
     const { name, username, email } = reqBody;
 
     console.log("Request Body:", reqBody); // For debugging, can be removed later
 
-    // Check if the user already exists
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
@@ -20,7 +19,6 @@ export async function POST(request) {
       );
     }
 
-    // Create a new user
     const newUser = new User({ name, username, email });
     const savedUser = await newUser.save();
 
@@ -29,8 +27,9 @@ export async function POST(request) {
       success: true,
       savedUser,
     });
+    
   } catch (error) {
-    console.error("Error:", error.message);
+    console.log("Error:", error.message);
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
