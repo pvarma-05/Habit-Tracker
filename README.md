@@ -1,36 +1,100 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Habit Tracker Web App
 
-## Getting Started
+This is a **Habit Tracker Web App** that allows users to track their habits, set goals, receive reminders, and monitor their progress. The app features a personalized dashboard, habit tracking, and detailed progress reports.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- **User Registration and Login**: Users can create an account, log in, and track their habits.
+- **Goal Tracking**: Set daily, weekly, and long-term goals.
+- **Notifications**: Receive email notifications for daily goals and reminders for incomplete tasks.
+- **Progress Dashboard**: View progress through charts and historical tracking.
+- **Customizable Habit Categories**: Users can customize habit categories and set priorities.
+- **Integration with Google Calendar**: Sync reminders with Google Calendar.
+- **User Profile & Settings**: Manage user details and account settings.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tech Stack
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- **Frontend & Backend**: NEXT.js
+- **Database**: MongoDB
+- **Authentication**: JWT
+- **Notifications**: Email (via Nodemailer)
+- **APIs**: Google Calendar API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Live Demo
 
-## Learn More
+Will Provide Soon
 
-To learn more about Next.js, take a look at the following resources:
+## Figma Design
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+You can view the design mockups of the app on Figma: [Figma Design File Link](https://www.figma.com/design/wxscjao9Nv6w63dh9uLPhN/Habit-Tracker?node-id=0-1&t=VHEuQB8VNXxuNIKb-1)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Installation
 
-## Deploy on Vercel
+Follow these steps to set up the project locally:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. **Clone the repository**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+    ```bash
+    git clone https://github.com/pvarma-05/Habit-Tracker.git
+    cd habit-tracker
+    ```
+
+2. **Install dependencies**:
+
+    ```bash
+    npm install
+    ```
+
+3. **Set up environment variables**:
+   
+   Create a `.env` file in the root of the project and add the following variables:
+
+    ```bash
+    MONGO_URI=your-mongo-uri
+    JWT_SECRET=your-jwt_secret
+    EMAIL_USER=your-service-email
+    EMAIL_PASS=your-service-password
+    ```
+
+4. **Run the development server**:
+
+    ```bash
+    npm run dev
+    ```
+
+5. **Visit**: [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Usage
+
+Once the app is running locally:
+
+1. **Sign up** to create a new user account.
+2. **Log in** to access the Habit Tracker Dashboard.
+3. **Set new habits** and track your progress.
+4. **Customize notifications** to receive reminders about your goals.
+5. **View progress** through the dashboard with historical data and charts.
+
+## Contributing
+
+Contributions are welcome! If you have suggestions or want to add features, feel free to fork the repo and create a PR.
+
+<!-- ### Steps for contributing:
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Commit your changes.
+4. Push to your forked repository.
+5. Create a pull request with a description of your changes. -->
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+- Thanks to [Next.js](https://nextjs.org/) for making development fast and simple.
+- Thanks to [Figma](https://www.figma.com/) for providing the design tool.
+- Special thanks to anyone who contributed to or tested the app.
+
+---
+
+## Made with ❤️ by Pradeep Varma
