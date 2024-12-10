@@ -21,11 +21,11 @@ export default function RegisterPage() {
 
   const validateForm = () => {
     if (!user.name || !user.username || !user.email) {
-      toast.error("All fields are required.");
+      toast.error("All fields are required");
       return false;
     }
     if (!validateEmail(user.email)) {
-      toast.error("Invalid email format.");
+      toast.error("Please enter a valid email address");
       return false;
     }
     return true;
@@ -40,13 +40,13 @@ export default function RegisterPage() {
     }
 
     try {
-      const response = await axios.post("/api/users/register", user);
+      const response = await axios.post("/api/auth/register", user);
       console.log("Registration Success:", response.data);
 
       toast.success("Registration Successful!", { id: toastId });
       router.push("/login");
     } catch (error) {
-      console.error("Registration Error:", error);
+      console.log("Registration Error:", error);
 
       toast.error(
         error.response?.data?.message || "An unexpected error occurred.",

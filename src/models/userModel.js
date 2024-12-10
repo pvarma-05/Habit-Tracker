@@ -19,15 +19,18 @@ const userSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    // password: {
-    //     type: String,
-    //     required: [true, "Please Provide a Password"],
-    // },
+
+    otp: {
+        type: String,
+        default: null,
+    },
+    otpExpires: {
+        type: Date,
+        default: null,
+    },
 
     verifyToken: String,
     verifyTokenExpiry: Date,
-    // forgotPasswordToken: String,
-    // forgotPasswordTokenExpiry: Date,
 
     profilePic: {
         type: String, // URL of the profile picture

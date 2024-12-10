@@ -9,8 +9,6 @@ export async function POST(request) {
     const reqBody = await request.json(); 
     const { name, username, email } = reqBody;
 
-    console.log("Request Body:", reqBody); // For debugging, can be removed later
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return NextResponse.json(
