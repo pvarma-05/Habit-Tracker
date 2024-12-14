@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import Image from "next/image";
 import Days from "@/components/Days";
 
-export default function DashboardPage() {
+export default function HelpPage() {
   const [hoveredFaq, setHoveredFaq] = useState(null);
 
   const faqs = [

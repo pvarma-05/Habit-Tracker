@@ -1,15 +1,14 @@
 'use client';
 import React,{useState,useEffect} from "react";
-// import Link from "next/link";
+import Link from "next/link";
 import axios from "axios";
-import { usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Days from "@/components/Days";
 
 export default function DashboardPage() {
-  // const router = useRouter();
-  const pathname = usePathname();
+  const router = useRouter();
 
   const [userData, setUserData] = useState({
     username: "",

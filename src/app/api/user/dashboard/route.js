@@ -12,13 +12,11 @@ export async function GET(request = NextRequest) {
 
         // Use `.select()` to exclude specific fields
         const user = await User.findOne({ _id: userId })
-            .select("-isVerified -otp -otpExpires -createdAt -updatedAt -verifyToken -verifyTokenExpiry");
+            .select("-isVerified -otp -otpExpires -updatedAt -verifyToken -verifyTokenExpiry");
 
         if (!user) {
             throw new Error("User not found");
         }
-
-        console.log(user);
         return NextResponse.json({
             message: "User Found",
             data: user,
