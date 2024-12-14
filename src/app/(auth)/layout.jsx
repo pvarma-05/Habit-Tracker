@@ -14,7 +14,7 @@ const layout = ({ children }) => {
         <p className='mt-5 w-[430px] text-[25px]'>Stay consistent, achieve your goals, and unlock your full potential with our habit tracker. Start your journey today</p>
       </div>
       <div>
-      <Image src={"/auth.svg"} alt="Image" width={500} height={500} />
+      <Image src={"/auth.svg"} alt="Image" draggable={false} width={500} height={500} />
       </div>
       </div>
       <div className='flex flex-col w-3/5 justify-center items-center'>

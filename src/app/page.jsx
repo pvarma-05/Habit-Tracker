@@ -11,15 +11,15 @@ export default function Home() {
             <h1 className="font-outfit font-bold text-[90px] leading-tight">Track <span className="text-[#A0FFBA]">Habits.</span></h1>
             <h1 className="font-outfit font-bold text-[90px] leading-tight">Build <span className="text-[#A0FFBA]">Success.</span></h1>
             <p className="font-poppins text-xl mt-[30px]">Stay consistent, achieve your goals, and unlock your full potential with our habit tracker. Start your journey today!</p>
-            <button className="w-[215px] h-[84px] bg-[#A0FFBA] rounded-2xl text-black font-semibold font-outfit text-2xl my-[25.91px]"><a href="/login">Get Started</a></button>
+            <button className="w-[215px] h-[84px] bg-[#A0FFBA] rounded-2xl text-black font-semibold font-outfit text-2xl my-[25.91px]"><a href="/register">Get Started</a></button>
           </div>
           <div className="flex justify-center items-center w-2/4">
-            <Image src={"/h1r.svg"} alt="h1-right" width={435} height={462} />
+            <Image src={"/h1r.svg"} alt="h1-right" draggable={false} width={435} height={462} />
           </div>
         </section>
         <section className="flex flex-row h-dvh items-center justify-center mt-[50px] ml-[188px] mr-[187px]">
           <div className="flex justify-center items-center w-2/4">
-            <Image src={"/h2l.svg"} alt="h1-right" width={435} height={462} />
+            <Image src={"/h2l.svg"} alt="h1-right" draggable={false} width={435} height={462} />
           </div>
           <div className="w-2/4 flex flex-col">
             <h1 className="font-outfit font-bold text-[80px] leading-tight text-right">Why Choose</h1>
@@ -43,7 +43,7 @@ export default function Home() {
               <p className="font-outfit text-4xl text-[#A0FFBA] leading-snug">-Ravi K., Software Engineer</p>
             </div>
             <div className="h1-right flex justify-center items-center w-2/4">
-              <Image src={"/h4r.svg"} alt="h1-right" width={525} height={527} />
+              <Image src={"/h4r.svg"} alt="h1-right" draggable={false} width={525} height={527} />
             </div>
           </div>
         </section>

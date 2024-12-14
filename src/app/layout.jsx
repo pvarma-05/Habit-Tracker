@@ -1,6 +1,6 @@
 import "./globals.css";
-import { Outfit, Poppins } from "next/font/google";
-import toast, { Toaster } from "react-hot-toast";
+import { Outfit, Poppins, Inter } from "next/font/google";
+import  { Toaster } from "react-hot-toast";
 
 const outfit = Outfit({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -14,6 +14,12 @@ const poppins = Poppins({
   variable: "--font-poppins",
 });
 
+const inter = Inter({
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  subsets: ["latin"], // Specify subsets as needed
+  variable: "--font-inter",
+});
+
 
 export const metadata = {
   title: "Welcome to Habit Tracker",
@@ -23,7 +29,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${outfit.variable} ${poppins.variable} antialiased`}>
+      <body className={`${outfit.variable} ${poppins.variable} ${inter.variable} antialiased`}>
       <Toaster
           position="top-center"
           reverseOrder={true}

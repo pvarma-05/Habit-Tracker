@@ -1,39 +1,30 @@
 'use client';
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
+import Image from "next/image";
+import Days from "@/components/Days";
 
 export default function DashboardPage() {
   const router = useRouter();
 
-  const onLogout = async () => {
-    const toastId = toast.loading("Loading");
-
-    try {
-      const response = await axios.post("/api/auth/logout");
-      console.log("Logout Success:", response.data);
-
-      toast.success("Logout Successful!", { id: toastId });
-      router.push("/login");
-    } catch (error) {
-      console.log("Logout Error:", error);
-
-      const errorMessage = error.response?.data?.message || "Logout Failed";
-      toast.error(errorMessage, { id: toastId });
-    }
-  }
-
   return (
-    <div>
-      <h1>Dashboard Content</h1>
-      <button
-        className="h-[56px] rounded-[41px] bg-[#A0FFBA] text-black text-sm font-semibold"
-        onClick={onLogout}
-      >
-        Logout
-      </button>
-    </div>
+    <main className=" w-full">
+      <section className=" ml-[49px] mr-[79px] flex-col justify-between my-7">
+        <div className="top flex justify-between">
+          <div className="greeting flex items-center gap-3">
+            <h1 className=" font-outfit font-bold text-[70px]">Hello, <span className="text-[#A0FFBA]">Sundar</span></h1>
+            <Image src={"/icons/hello-2.png"} width={60} height={60} draggable={false} alt="wave" />
+          </div>
+          <Days />
+        </div>
+        <br />
+        <div className="bottom w-[549px]">
+          <p className="text-[#F0F0F0] font-poppins text-base">once you understand that habits can change, you have the freedom and the responsibility to remake them.</p>
+        </div>
+      </section>
+    </main>
   )
 }

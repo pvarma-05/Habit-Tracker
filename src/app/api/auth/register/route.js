@@ -10,9 +10,17 @@ export async function POST(request) {
     const { name, username, email } = reqBody;
 
     const existingUser = await User.findOne({ email });
+    const existingUsername = await User.findOne({username});
     if (existingUser) {
       return NextResponse.json(
         { message: "User Already Exists" },
+        { status: 400 }
+      );
+    }
+
+    if (existingUsername) {
+      return NextResponse.json(
+        { message: "Username Already Exists" },
         { status: 400 }
       );
     }

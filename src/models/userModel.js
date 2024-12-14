@@ -34,14 +34,14 @@ const userSchema = new mongoose.Schema({
 
     profilePic: {
         type: String, // URL of the profile picture
-        default: null,
+        default: "/user.png",
     },
     preferences: {
         tags: {
             type: [String],
             default: ["Health", "Work", "Personal Development", "Social", "Finance", "Household"],
         },
-        defaultNotificationTime: {
+        defaultNotificationTime: { 
             type: String, // Example: "09:00"
             default: "09:00",
         },
