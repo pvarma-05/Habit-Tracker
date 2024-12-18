@@ -81,8 +81,8 @@ export default function ProfilePage() {
         <div className="flex flex-col gap-5">
           <h1 className="font-outfit font-semibold text-[35px] text-[#A0FFBA]">SETTINGS</h1>
           <div className="h-[100px] bg-[#263238] rounded-[25px] flex justify-between items-center pl-[42px] pr-[53px] ">
-            <h1 className="font-poppins font-semibold text-[25px]">Habits Preference</h1>
-            <p className="font-poppins text-[17px] ">Customize Tags & remainders.</p>
+            <h1 className="font-poppins font-semibold text-[25px]">Habits Preferences</h1>
+            <p className="font-poppins text-[17px] ">Customize Tags and remainders.</p>
             <Image src={"/icons/goto.svg"} draggable={false} height={30} width={30} alt="go icon" />
           </div>
           <div className="h-[100px] bg-[#263238] rounded-[25px] flex justify-between items-center pl-[42px] pr-[53px] ">
@@ -90,11 +90,11 @@ export default function ProfilePage() {
             <p className="font-poppins text-[17px]">Email, push, and Calendar sync.</p>
             <Image src={"/icons/goto.svg"} draggable={false} height={30} width={30} alt="go icon" />
           </div>
-          <div className="h-[100px] bg-[#263238] rounded-[25px] flex justify-between items-center pl-[42px] pr-[53px] ">
+          {/* <div className="h-[100px] bg-[#263238] rounded-[25px] flex justify-between items-center pl-[42px] pr-[53px] ">
             <h1 className="font-poppins font-semibold text-[25px]">Theme/Appearance</h1>
             <p className="font-poppins text-[17px]">Change into Light and Dark Mode.</p>
             <Image src={"/icons/goto.svg"} draggable={false} height={30} width={30} alt="go icon" />
-          </div>
+          </div> */}
         </div>
       </section>
     </main>
