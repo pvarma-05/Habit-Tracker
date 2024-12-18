@@ -23,7 +23,7 @@ const notificationSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-    isMuted: {
+    isSaved: {
         type: Boolean,
         default: false,
     },
@@ -32,6 +32,9 @@ const notificationSchema = new mongoose.Schema({
         default: Date.now,
     },
 });
+
+// Auto-deletion logic for notifications
+// notificationSchema.index({ createdAt: 1 }, { expireAfterSeconds: 604800, partialFilterExpression: { isSaved: false } });
 
 const Notification = mongoose.models.Notification || mongoose.model("Notification", notificationSchema);
 export default Notification;

@@ -15,10 +15,6 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please Provide an Email"],
         unique: true,
     },
-    isVerified: {
-        type: Boolean,
-        default: false,
-    },
 
     otp: {
         type: String,
@@ -34,20 +30,20 @@ const userSchema = new mongoose.Schema({
 
     profilePic: {
         type: String, // URL of the profile picture
-        default: "/user.png",
+        default: null,
     },
     preferences: {
         tags: {
             type: [String],
             default: ["Health", "Work", "Personal Development", "Social", "Finance", "Household"],
         },
-        defaultNotificationTime: { 
+        morningReminderTime: {
             type: String, // Example: "09:00"
             default: "09:00",
         },
-        theme: {
-            type: String, // "light" or "dark"
-            default: "dark",
+        nightAlertTime: {
+            type: String, // Example: "21:00"
+            default: "21:00",
         },
     },
     createdAt: {

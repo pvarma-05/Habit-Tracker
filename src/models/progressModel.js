@@ -21,6 +21,10 @@ const progressSchema = new mongoose.Schema({
         enum: ["Completed", "Skipped", "Pending"],
         required: true,
     },
+    updatedAt: {
+        type: Date,
+        default: Date.now,
+    },
 });
 
 const Progress = mongoose.models.Progress || mongoose.model("Progress", progressSchema);
