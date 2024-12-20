@@ -28,7 +28,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scrollbar-thin scrollbar-thumb-[#A0FFBA] scrollbar-track-[#263238] ">
       <body className={`${outfit.variable} ${poppins.variable} ${inter.variable} antialiased`}>
       <Toaster
           position="top-center"

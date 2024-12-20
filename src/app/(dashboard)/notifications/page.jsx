@@ -17,7 +17,7 @@ export default function NotificationPage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("/api/user/dashboard");
+        const response = await axios.get("/api/user/root");
         const { data } = response.data;
         setUserData({
           username: data.username,

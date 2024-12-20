@@ -17,7 +17,7 @@ export default function ProgressPage() {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await axios.get("/api/user/dashboard");
+        const response = await axios.get("/api/user/root");
         const { data } = response.data;
         setUserData({
           username: data.username,
@@ -45,8 +45,8 @@ export default function ProgressPage() {
           <p className="text-[#F0F0F0] font-poppins text-base">once you understand that habits can change, you have the freedom and the responsibility to remake them.</p>
         </div>
       </section>
-      <section className="flex ml-[49px] mr-[79px] flex-col my-7 gap-9">
-        <div className="flex items-center justify-between w-[996px]">
+      <section className="flex ml-[49px] mr-[79px] flex-col my-7 gap-5">
+        <div className="flex items-center justify-between">
           <div className="w-[228px] h-[228px] bg-[#263238] rounded-[30px] flex flex-col items-center justify-center">
             <p className="font-outfit font-semibold text-[21px] w-[142px] text-center ">Total Habits Created</p>
             <p className="font-outfit font-semibold text-[#A0FFBA] text-[50px] w-[142px] text-center ">5</p>
@@ -55,7 +55,7 @@ export default function ProgressPage() {
             <p className="font-outfit font-semibold text-[21px] w-[142px] text-center ">Total Habits Completed</p>
             <p className="font-outfit font-semibold text-[#A0FFBA] text-[50px] w-[142px] text-center ">5</p>
           </div>
-          <div className="w-[482px] h-[228px] bg-[#263238] rounded-[30px] justify-center items-center flex">
+          <div className="w-[497.5px] h-[228px] bg-[#263238] rounded-[30px] justify-center items-center flex">
             <div className="w-[414px] flex flex-col gap-4  justify-between ">
               <h1 className="font-outfit text-[30px] text-[#A0FFBA] font-semibold ">TODAY'S PROGRESS</h1>
               <div>
@@ -65,8 +65,8 @@ export default function ProgressPage() {
             </div>
           </div>
         </div>
-        <div className="flex items-center justify-between w-[996px]">
-          <div className="w-[482px] h-[228px] bg-[#263238] rounded-[30px] justify-center items-center flex">
+        <div className="flex items-center justify-between">
+          <div className="w-[497.5px] h-[228px] bg-[#263238] rounded-[30px] justify-center items-center flex">
             <div className="w-[414px] flex flex-col gap-4  justify-between ">
               <h1 className="font-outfit text-[30px] text-[#A0FFBA] font-semibold ">WEEKLY PROGRESS</h1>
               <div>
