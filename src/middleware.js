@@ -26,6 +26,8 @@ export const config = {
         "/progress",
         "/notifications",
         "/profile",
+        "/profile/update-1",
+        "/profile/update-3",
         "/help",
     ],
 };
