@@ -4,6 +4,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Days from "@/components/Days";
+import Link from "next/link";
 
 export default function ProfilePage() {
 
@@ -68,12 +69,12 @@ export default function ProfilePage() {
               height={88.81}
               alt="avatar"
               draggable={false}
-              className="rounded-full"
+              className="rounded-full cursor-pointer"
             />
             <h1 className="font-outfit font-semibold text-[25px]">{userData.name}</h1>
             <p className="font-outfit text-[17px]">{userData.email}</p>
             <p className="font-outfit text-[17px]">Member Since : {userData.created}</p>
-            <Image src={"/icons/edit.svg"} draggable={false} height={30} width={30} alt="edit icon" />
+            <Link href={"/profile/update-1"}><Image src={"/icons/edit.svg"} draggable={false} height={30} width={30} alt="edit icon" /></Link>
           </div>
         </div>
       </section>
@@ -83,12 +84,24 @@ export default function ProfilePage() {
           <div className="h-[100px] bg-[#263238] rounded-[25px] flex justify-between items-center pl-[42px] pr-[53px] ">
             <h1 className="font-poppins font-semibold text-[25px]">Habits Preferences</h1>
             <p className="font-poppins text-[17px] ">Make your own Custom Tags.</p>
-            <Image src={"/icons/goto.svg"} draggable={false} height={30} width={30} alt="go icon" />
+            <Image src={"/icons/goto.svg"} draggable={false} height={30} width={30} alt="goto icon" className="cursor-pointer" onClick={() => {
+              toast('Sorry, This part is not done yet!', {
+                position: 'top-center',
+                style: {
+                  border: "1px solid #ffd415",
+                  padding: "10px",
+                  color: "#fff",
+                  background: "#333F4E",
+                },
+                // Custom Icon
+                icon: '😅',
+              });
+            }} />
           </div>
           <div className="h-[100px] bg-[#263238] rounded-[25px] flex justify-between items-center pl-[42px] pr-[53px] ">
             <h1 className="font-poppins font-semibold text-[25px]">Notification Settings</h1>
             <p className="font-poppins text-[17px]">Email, push, and Calendar sync.</p>
-            <Image src={"/icons/goto.svg"} draggable={false} height={30} width={30} alt="go icon" />
+            <Link href={"/profile/update-3"}><Image src={"/icons/goto.svg"} draggable={false} height={30} width={30} alt="go icon" /></Link>
           </div>
         </div>
       </section>
