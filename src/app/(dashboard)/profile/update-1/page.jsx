@@ -103,7 +103,19 @@ export default function UpdatePage1() {
                             draggable={false}
                             className="rounded-full cursor-pointer"
                         />
-                        <button className="bg-[#263238] rounded-md font-outfit text-lg h-[50px] w-[90px]">
+                        <button className="bg-[#263238] rounded-md font-outfit text-lg h-[50px] w-[90px]" onClick={() => {
+                            toast('Sorry, This part is not done yet!', {
+                                position: 'top-center',
+                                style: {
+                                    border: "1px solid #ffd415",
+                                    padding: "10px",
+                                    color: "#fff",
+                                    background: "#333F4E",
+                                },
+                                // Custom Icon
+                                icon: '😅',
+                            });
+                        }}>
                             Upload
                         </button>
                     </div>
