@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import User from "./userModel"; // Import User model to validate preferences
+import User from "./userModel";
 
 const habitSchema = new mongoose.Schema(
     {
@@ -38,7 +38,7 @@ const habitSchema = new mongoose.Schema(
         },
         streakMaintained: {
             type: Boolean,
-            default: false, // This will be updated in the backend
+            default: false,
         },
         startDate: {
             type: Date,

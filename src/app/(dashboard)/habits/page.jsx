@@ -4,32 +4,45 @@ import Link from "next/link";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
-import Image from "next/image";
 import Days from "@/components/Days";
 
 export default function HabitsPage() {
-  const router = useRouter();
-
-  const [userData, setUserData] = useState({
-    username: "",
-  });
+  const [habits, setHabits] = useState({ daily: [], weekly: [], monthly: [] });
 
   useEffect(() => {
-    const fetchUserData = async () => {
+    const fetchHabits = async () => {
       try {
-        const response = await axios.get("/api/user/root");
+        const response = await axios.get("/api/habits");
         const { data } = response.data;
-        setUserData({
-          username: data.username,
+        const categorized = { daily: [], weekly: [], monthly: [] };
+
+        data.forEach((habit) => {
+          categorized[habit.recurrence.toLowerCase()].push(habit);
         });
+
+        setHabits(categorized);
       } catch (error) {
-        console.log("Failed to fetch user data:", error);
-        toast.error("Unable to load user data.");
+        console.error("Failed to fetch habits:", error);
+        toast.error("Unable to load habits.");
       }
     };
 
-    fetchUserData();
+    fetchHabits();
   }, []);
+
+  const renderHabitBox = (habits, type) => (
+    <div className="flex flex-col w-[340px] h-[470px] bg-[#263238] rounded-[29px] p-5 overflow-y-auto">
+      <h2 className="font-poppins font-semibold text-xl text-center">{type.toUpperCase()}</h2>
+      <div className="mt-4 space-y-3">
+        {habits.map((habit) => (
+          <div key={habit._id} className="p-3 bg-[#37474F] rounded-md">
+            <h3 className="font-poppins font-medium">{habit.name}</h3>
+            <p className="text-sm text-gray-400">{habit.category}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 
   return (
     <main className=" w-full">
@@ -49,39 +62,33 @@ export default function HabitsPage() {
         <div className="flex flex-col gap-3">
           <h1 className="font-outfit font-semibold text-[35px] text-[#A0FFBA]">VIEW HABITS</h1>
           <div className="flex justify-between">
-            <div className="flex w-[340px] h-[470px] bg-[#263238] rounded-[29px] justify-center pt-[50px]">
-              <p className="font-poppins font-semibold text-xl">DAILY</p>
-            </div>
-            <div className="flex w-[340px] h-[470px] bg-[#263238] rounded-[29px] justify-center pt-[50px]">
-              <p className="font-poppins font-semibold text-xl">WEEKLY</p>
-            </div>
-            <div className="flex w-[340px] h-[470px] bg-[#263238] rounded-[29px] justify-center pt-[50px]">
-              <p className="font-poppins font-semibold text-xl">MONTHLY</p>
-            </div>
+            {renderHabitBox(habits.daily, "Daily")}
+            {renderHabitBox(habits.weekly, "Weekly")}
+            {renderHabitBox(habits.monthly, "Monthly")}
           </div>
         </div>
         <div className="flex justify-between">
           <Link
-          href={"/login"}
-          className="flex justify-center items-center bg-[#A0FFBA] w-[226px] h-[58px] rounded-[30px] " 
+            href={"/habits/create"}
+            className="flex justify-center items-center bg-[#A0FFBA] w-[226px] h-[58px] rounded-[30px] "
           >
             <p className="font-poppins text-base font-semibold text-black">CREATE HABIT</p>
           </Link>
           <Link
-          href={"/login"}
-          className="flex justify-center items-center bg-[#fff] w-[226px] h-[58px] rounded-[30px] " 
+            href={"/habits/update"}
+            className="flex justify-center items-center bg-[#fff] w-[226px] h-[58px] rounded-[30px] "
           >
             <p className="font-poppins text-base font-semibold text-black">UPDATE PROGRESS</p>
           </Link>
           <Link
-          href={"/login"}
-          className="flex justify-center items-center bg-[#263238] w-[226px] h-[58px] rounded-[30px] " 
+            href={"/habits/edit"}
+            className="flex justify-center items-center bg-[#263238] w-[226px] h-[58px] rounded-[30px] "
           >
             <p className="font-poppins text-base font-semibold">EDIT HABIT</p>
           </Link>
           <Link
-          href={"/login"}
-          className="flex justify-center items-center bg-[#FB5456] w-[226px] h-[58px] rounded-[30px] " 
+            href={"/habits/delete"}
+            className="flex justify-center items-center bg-[#FB5456] w-[226px] h-[58px] rounded-[30px] "
           >
             <p className="font-poppins text-base font-semibold text-black">DELETE HABIT</p>
           </Link>

@@ -41,7 +41,7 @@ const Sidebar = () => {
         try {
             await axios.post("/api/auth/logout");
             toast.success("Logout successful!", { id: toastId });
-            router.push("/login");
+            router.push("/");
         } catch (error) {
             console.error("Logout Error:", error);
             toast.error("Logout failed.", { id: toastId });
