@@ -11,14 +11,19 @@ export default function DeleteHabitPage() {
     const [formData, setFormData] = useState({
         habitId: "",
     });
-    const [habits, setHabits] = useState([]);
+    const [habits, setHabits] = useState({ daily: [], weekly: [], monthly: [], completed: [] });
     const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchHabits = async () => {
             try {
                 const response = await axios.get("/api/habits");
-                setHabits(response.data.data || []);
+                setHabits(response.data.data || {
+                    daily: [],
+                    weekly: [],
+                    monthly: [],
+                    completed: [],
+                });
             } catch (error) {
                 console.error("Error fetching habits:", error);
                 toast.error("Failed to fetch habits.");
@@ -45,9 +50,7 @@ export default function DeleteHabitPage() {
             });
             if (response.status === 200) {
                 toast.success(response.data.message || "Habit deleted successfully!");
-                setHabits(habits.filter((habit) => habit._id !== formData.habitId));
-                router.push("/habits")
-                setFormData({ habitId: "" });
+                router.push("/habits");
             } else {
                 toast.error(response.data.message || "Failed to delete habit.");
             }
@@ -94,7 +97,7 @@ export default function DeleteHabitPage() {
                             <option value="" disabled>
                                 -- Select a Habit --
                             </option>
-                            {habits.map((habit) => (
+                            {Object.values(habits).flat().map((habit) => (
                                 <option key={habit._id} value={habit._id}>
                                     {habit.name}
                                 </option>

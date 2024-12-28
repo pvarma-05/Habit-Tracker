@@ -2,7 +2,6 @@ import { NextResponse, NextRequest } from "next/server";
 
 export async function middleware(request = NextRequest) {
     const path = request.nextUrl.pathname;
-    console.log(path)
     const isPublicPath = path === '/login' || path === '/register' || path === '/'
     const token = request.cookies.get('token')?.value || ''
 
@@ -23,6 +22,10 @@ export const config = {
         "/register",
         "/dashboard",
         "/habits",
+        "/habits/create",
+        "/habits/update",
+        "/habits/edit",
+        "/habits/delete",
         "/progress",
         "/notifications",
         "/profile",

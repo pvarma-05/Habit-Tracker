@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 export default function EditHabitPage() {
     const router = useRouter();
 
-    const [habits, setHabits] = useState([]);
+    const [habits, setHabits] = useState({ daily: [], weekly: [], monthly: [], completed: [] });
     const [selectedHabitId, setSelectedHabitId] = useState("");
     const [formData, setFormData] = useState({
         name: "",
@@ -21,12 +21,18 @@ export default function EditHabitPage() {
         const fetchHabits = async () => {
             try {
                 const response = await axios.get("/api/habits");
-                setHabits(response.data.data || []);
+                setHabits(response.data.data || {
+                    daily: [],
+                    weekly: [],
+                    monthly: [],
+                    completed: [],
+                });
             } catch (error) {
                 console.error("Error fetching habits:", error);
                 toast.error("Failed to fetch habits.");
             }
         };
+
         fetchHabits();
     }, []);
 
@@ -34,7 +40,8 @@ export default function EditHabitPage() {
         const habitId = e.target.value;
         setSelectedHabitId(habitId);
 
-        const selectedHabit = habits.find((habit) => habit._id === habitId);
+        const allHabits = Object.values(habits).flat();
+        const selectedHabit = allHabits.find((habit) => habit._id === habitId);
         if (selectedHabit) {
             setFormData({
                 name: selectedHabit.name,
@@ -43,6 +50,7 @@ export default function EditHabitPage() {
             });
         }
     };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -109,12 +117,13 @@ export default function EditHabitPage() {
                             <option value="" disabled>
                                 -- Select a Habit --
                             </option>
-                            {habits.map((habit) => (
+                            {Object.values(habits).flat().map((habit) => (
                                 <option key={habit._id} value={habit._id}>
                                     {habit.name}
                                 </option>
                             ))}
                         </select>
+
                     </div>
 
                     {selectedHabitId && (
@@ -174,9 +183,8 @@ export default function EditHabitPage() {
 
                     <div className="flex gap-5">
                         <button
-                            className={`bg-[#A0FFBA] rounded-md text-black font-outfit text-lg font-semibold h-[50px] w-[90px] ${
-                                loading ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                            className={`bg-[#A0FFBA] rounded-md text-black font-outfit text-lg font-semibold h-[50px] w-[90px] ${loading ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
                             onClick={handleSubmit}
                             disabled={loading}
                         >

@@ -8,7 +8,6 @@ connect();
 export async function GET(request = NextRequest) {
     try {
         const userId = await getData(request);
-        console.log(userId);
 
         // Use `.select()` to exclude specific fields
         const user = await User.findOne({ _id: userId })

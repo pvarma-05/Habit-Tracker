@@ -21,7 +21,7 @@ export default function Home() {
           <div className="flex justify-start items-center w-2/4">
             <Image src={"/h2l.svg"} alt="h1-right" draggable={false} width={435} height={462} />
           </div>
-          <div className="w-2/4 flex flex-col">
+          <div className="w-2/3 flex flex-col">
             <h1 className="font-outfit font-bold text-[80px] leading-tight text-right">Why Choose</h1>
             <h1 className="font-outfit font-bold text-[80px] leading-tight text-right text-[#A0FFBA]">Habit Tracker?</h1>
             <p className="font-poppins text-xl mt-[30px]">Our habit tracker is more than just a checklist. It's your partner in personal growth. Its Designed to keep you always motivated and accountable, it helps you to track your daily habits, analyze your progress, and stay on top of your goals. Whether you're focusing on health, work, or personal development. we've got you covered.</p>
@@ -42,7 +42,7 @@ export default function Home() {
               <p className="font-outfit text-4xl  leading-snug mb-20">This habit tracker completely transformed my daily routine. The reminders and progress insights keep me on track every day!</p>
               <p className="font-outfit text-4xl text-[#A0FFBA] leading-snug">-Ravi K., Software Engineer</p>
             </div>
-            <div className="h1-right flex justify-center items-center w-2/4">
+            <div className="h1-right flex justify-end items-center w-2/4">
               <Image src={"/h4r.svg"} alt="h1-right" draggable={false} width={525} height={527} />
             </div>
           </div>
