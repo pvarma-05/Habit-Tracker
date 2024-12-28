@@ -12,7 +12,7 @@ export default function ProgressPage() {
     totalHabitsCompleted: 0,
     dailyProgress: 0,
     weeklyProgress: 0,
-    monthlyProgress: 0,
+    // monthlyProgress: 0,
     bestStreak: { count: 0, habits: "", habitNames: [] },
     currentActiveStreaks: 0,
   });
