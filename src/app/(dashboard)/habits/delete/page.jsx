@@ -14,7 +14,6 @@ export default function DeleteHabitPage() {
     const [habits, setHabits] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    // Fetch habits on component mount
     useEffect(() => {
         const fetchHabits = async () => {
             try {
@@ -47,6 +46,7 @@ export default function DeleteHabitPage() {
             if (response.status === 200) {
                 toast.success(response.data.message || "Habit deleted successfully!");
                 setHabits(habits.filter((habit) => habit._id !== formData.habitId));
+                router.push("/habits")
                 setFormData({ habitId: "" });
             } else {
                 toast.error(response.data.message || "Failed to delete habit.");
@@ -80,7 +80,6 @@ export default function DeleteHabitPage() {
             <br />
             <section className="ml-[49px] mr-[79px] flex-col justify-between my-10 rounded-lg">
                 <div className="flex flex-col justify-center gap-7">
-                    {/* Habit Selection */}
                     <div className="flex flex-col gap-2 h-[72px] w-2/3 rounded-xl p-3 font-poppins text-sm bg-[#333F4E] text-white">
                         <label htmlFor="habitId" className="text-sm">
                             Select Habit
@@ -103,7 +102,6 @@ export default function DeleteHabitPage() {
                         </select>
                     </div>
 
-                    {/* Action Buttons */}
                     <div className="flex gap-5">
                         <button
                             className={`bg-[#A0FFBA] rounded-md text-black font-outfit text-lg font-semibold h-[50px] w-[90px] ${loading ? "opacity-50 cursor-not-allowed" : ""

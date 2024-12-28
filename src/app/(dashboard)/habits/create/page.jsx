@@ -57,7 +57,7 @@ export default function CreateHabitPage() {
                 <br />
                 <div className="bottom w-[549px]">
                     <p className="text-[#F0F0F0] font-poppins text-base">
-                        Your personal space for tracking your journey.
+                        Create a new Habit.
                     </p>
                 </div>
             </section>
