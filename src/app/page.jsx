@@ -18,7 +18,7 @@ export default function Home() {
           </div>
         </section>
         <section className="flex flex-row h-dvh items-center justify-center mt-[50px] ml-[188px] mr-[187px]">
-          <div className="flex justify-center items-center w-2/4">
+          <div className="flex justify-start items-center w-2/4">
             <Image src={"/h2l.svg"} alt="h1-right" draggable={false} width={435} height={462} />
           </div>
           <div className="w-2/4 flex flex-col">
