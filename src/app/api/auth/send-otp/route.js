@@ -1,6 +1,6 @@
 import { connect } from "@/config/config";
 import User from "@/models/userModel";
-import nodemailer from "nodemailer";
+import { sendMail } from "@/lib/sendMail";
 
 connect();
 
@@ -16,7 +16,6 @@ export async function POST(request) {
       );
     }
 
-    // Generate OTP
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const otpExpires = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes
 
@@ -24,47 +23,35 @@ export async function POST(request) {
     user.otpExpires = otpExpires;
     await user.save();
 
-    // Send OTP via email with HTML template
-    const transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-    });
-
-    const mailOptions = {
-      from: `"Habit Tracker" <${process.env.EMAIL_USER}>`,
-      to: email,
-      subject: "Your OTP for Habit Tracker Login",
-      html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #000000;">
-          <h2>Habit Tracker OTP Verification</h2>
-          <p>Hi there,</p>
-          <p>Your OTP for logging into the Habit Tracker is:</p>
-          <div style="text-align: center; margin: 20px 0;">
-            <span style="
-              display: inline-block;
-              padding: 10px 20px;
-              font-size: 20px;
-              font-weight: bold;
-              color: #000000;
-              background-color: #A0FFBA;
-              border-radius: 5px;">
-              ${otp}
-            </span>
-          </div>
-          <p>This OTP is valid for <strong>5 minutes</strong>. Please use it to complete your login process.</p>
-          <p>If you did not request this email, please ignore it.</p>
-          <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
-          <p style="font-size: 12px; color: #666;">
-            This email was sent by Habit Tracker. Please do not reply to this email.
-          </p>
+    const subject = "Your OTP for Habit Tracker Login";
+    const html = `
+      <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #000000;">
+        <h2>Habit Tracker OTP Verification</h2>
+        <p>Hi there,</p>
+        <p>Your OTP for logging into the Habit Tracker is:</p>
+        <div style="text-align: center; margin: 20px 0;">
+          <span style="
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 20px;
+            font-weight: bold;
+            color: #000000;
+            background-color: #A0FFBA;
+            border-radius: 5px;">
+            ${otp}
+          </span>
         </div>
-      `,
-    };
+        <p>This OTP is valid for <strong>5 minutes</strong>. Please use it to complete your login process.</p>
+        <p>If you did not request this email, please ignore it.</p>
+        <hr style="border: none; border-top: 1px solid #ddd; margin: 20px 0;" />
+        <p style="font-size: 12px; color: #666;">
+          This email was sent by Habit Tracker. Please do not reply to this email.
+        </p>
+      </div>
+    `;
 
-    await transporter.sendMail(mailOptions);
+    // Send OTP email
+    await sendMail(email, subject, html);
 
     return new Response(
       JSON.stringify({ message: "OTP sent successfully." }),

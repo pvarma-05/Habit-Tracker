@@ -44,6 +44,14 @@ const habitSchema = new mongoose.Schema(
       type: Date,
       default: null,
     },
+    updateTime: {
+      type: Date,
+      default: null,
+    },
+    resetTime: {
+      type: Date,
+      default: null,
+    },
     isCompleted: {
       type: Boolean,
       default: false,
@@ -61,55 +69,69 @@ const habitSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-habitSchema.methods.updateProgress = function () {
-    const now = new Date();
-  
-    if (this.isCompleted) {
-      throw new Error("Cannot update for a completed habit.");
-    }
-  
-    const lastUpdated = this.progressUpdatedDate || this.startDate;
-    const resetTime = getResetTime(this.recurrence, lastUpdated);
-  
-    if (this.progressUpdatedDate && this.progressUpdatedDate >= lastUpdated && now < resetTime) {
-      throw new Error("Progress has already been updated.");
-    }
-  
-    if (now >= resetTime) {
-      this.streakCount = 0;
-    } else {
-      this.streakCount += 1;
-    }
-  
-    this.streakMaintained = true;
-    this.progressUpdatedDate = now;
-  };
-  
-habitSchema.methods.completeHabit = function () {
-  this.isCompleted = true;
-  this.endDate = new Date();
-};
-
-function getResetTime(recurrence, date) {
-  const resetTime = new Date(date);
+function calculateTimes(recurrence, lastUpdate) {
+  const now = new Date();
+  const updateTime = new Date(lastUpdate);
+  const resetTime = new Date(lastUpdate);
 
   switch (recurrence) {
     case "Daily":
-      resetTime.setDate(resetTime.getDate() + 1);
+      updateTime.setDate(updateTime.getDate() + 1);
+      resetTime.setDate(resetTime.getDate() + 2);
+      resetTime.setHours(0, 0, 0, 0);
       break;
     case "Weekly":
-      resetTime.setDate(resetTime.getDate() + 7);
+      updateTime.setDate(updateTime.getDate() + 7);
+      resetTime.setDate(resetTime.getDate() + 14);
+      resetTime.setHours(0, 0, 0, 0);
       break;
     case "Monthly":
-      resetTime.setMonth(resetTime.getMonth() + 1);
+      updateTime.setMonth(updateTime.getMonth() + 1);
+      resetTime.setMonth(resetTime.getMonth() + 2);
+      resetTime.setDate(1);
+      resetTime.setHours(0, 0, 0, 0);
       break;
     default:
       throw new Error("Invalid recurrence type");
   }
 
-  resetTime.setHours(0, 0, 0, 0);
-  return resetTime;
+  return { updateTime, resetTime };
 }
+
+habitSchema.methods.updateProgress = function () {
+  const now = new Date();
+
+  if (this.isCompleted) {
+    throw new Error("Cannot update a completed habit.");
+  }
+
+  // // Calculate automatic reset
+  // if (this.resetTime && now >= this.resetTime) {
+  //   this.streakCount = 0; // Streak reset
+  // }
+
+  if (this.updateTime && now < this.updateTime) {
+    throw new Error("Progress cannot be updated yet.");
+  }
+
+  this.streakCount += 1;
+  this.streakMaintained = true;
+  this.progressUpdatedDate = now;
+
+  const times = calculateTimes(this.recurrence, now);
+  this.updateTime = times.updateTime;
+  this.resetTime = times.resetTime;
+};
+
+habitSchema.methods.completeHabit = function () {
+  this.isCompleted = true;
+  this.endDate = new Date();
+};
+
+habitSchema.methods.resetStreak = function () {
+  this.streakCount = 0;
+  this.streakMaintained = false;
+};
 
 const Habit = mongoose.models.Habit || mongoose.model("Habit", habitSchema);
 export default Habit;
