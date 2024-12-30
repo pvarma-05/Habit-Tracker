@@ -50,7 +50,6 @@ export async function PATCH(request = NextRequest) {
 }
 
 
-// Route for marking a habit as complete
 export async function POST(request = NextRequest) {
   try {
     const userId = await getData(request);

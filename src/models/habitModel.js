@@ -105,10 +105,9 @@ habitSchema.methods.updateProgress = function () {
     throw new Error("Cannot update a completed habit.");
   }
 
-  // // Calculate automatic reset
-  // if (this.resetTime && now >= this.resetTime) {
-  //   this.streakCount = 0; // Streak reset
-  // }
+  if (this.resetTime && now >= this.resetTime) {
+    this.streakCount = 0;
+  }
 
   if (this.updateTime && now < this.updateTime) {
     throw new Error("Progress cannot be updated yet.");
@@ -126,11 +125,6 @@ habitSchema.methods.updateProgress = function () {
 habitSchema.methods.completeHabit = function () {
   this.isCompleted = true;
   this.endDate = new Date();
-};
-
-habitSchema.methods.resetStreak = function () {
-  this.streakCount = 0;
-  this.streakMaintained = false;
 };
 
 const Habit = mongoose.models.Habit || mongoose.model("Habit", habitSchema);
