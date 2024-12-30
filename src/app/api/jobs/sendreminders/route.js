@@ -76,7 +76,7 @@ async function sendEmailsToAllUsers() {
 
       if (!daily.length && !weekly.length && !monthly.length) {
         habitListHTML = `
-          <p>You currently have no habits, Create new ones to stay productive!</p>
+          <p>You currently have no habits. Create new ones to stay productive!</p>
         `;
       }
 
@@ -87,7 +87,7 @@ async function sendEmailsToAllUsers() {
             <h1 style="color: black; margin-bottom: 20px;">Habit Tracker</h1>
             <div style="text-align: left; color: black;">
               <h2>Hi ${user.name || "there"},</h2>
-              <p>This is a Reminder Mail from Habit Tracker which shows your pending Habits for the day/week/month that you must Complete to Maintain Streak.</p>
+              <p>This is a Reminder Mail from Habit Tracker which shows your pending habits for the day/week/month that you must complete to maintain your streak.</p>
               ${habitListHTML}
               <p style="margin-top: 20px;">
                 Stay consistent and achieve your goals!<br>
@@ -108,14 +108,14 @@ async function sendEmailsToAllUsers() {
   }
 }
 
-export async function POST(req) {
+export async function GET(req) {
   try {
     await sendEmailsToAllUsers();
     return NextResponse.json({
       message: "Emails sent successfully to all users.",
     });
   } catch (error) {
-    console.log("Error in POST handler:", error.message);
+    console.log("Error in GET handler:", error.message);
     return NextResponse.json(
       { message: "Failed to send emails.", error: error.message },
       { status: 500 }
