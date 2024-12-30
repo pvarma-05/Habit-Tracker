@@ -104,18 +104,23 @@ async function sendEmailsToAllUsers() {
 
     console.log("Emails sent successfully.");
   } catch (error) {
-    console.log("Error sending emails:", error.message);
+    console.error("Error sending emails:", error.message);
   }
 }
 
-export async function GET(req) {
+export async function GET(request) {
+  const authHeader = request.headers.get("authorization");
+  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+    return new Response("Unauthorized", { status: 401 });
+  }
+
   try {
     await sendEmailsToAllUsers();
     return NextResponse.json({
       message: "Emails sent successfully to all users.",
     });
   } catch (error) {
-    console.log("Error in GET handler:", error.message);
+    console.error("Error in GET handler:", error.message);
     return NextResponse.json(
       { message: "Failed to send emails.", error: error.message },
       { status: 500 }
