@@ -1,0 +1,8 @@
+{
+    "crons": [
+        {
+            "path": "/api/jobs/resetstreaks",
+            "schedule": "0 0 * * *"
+        }
+    ]
+}
