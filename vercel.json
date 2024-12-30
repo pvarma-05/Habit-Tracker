@@ -5,7 +5,7 @@
             "schedule": "0 9 * * *"
         },
         {
-            "path": "/api/jobs/sendreminders",
+            "path": "/api/jobs/sendalerts",
             "schedule": "0 21 * * *"
         }
     ]
