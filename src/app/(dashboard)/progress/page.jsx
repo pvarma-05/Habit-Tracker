@@ -12,7 +12,6 @@ export default function ProgressPage() {
     totalHabitsCompleted: 0,
     dailyProgress: 0,
     weeklyProgress: 0,
-    // monthlyProgress: 0,
     bestStreak: { count: 0, habits: "", habitNames: [] },
     currentActiveStreaks: 0,
   });
@@ -21,10 +20,29 @@ export default function ProgressPage() {
     const fetchProgressData = async () => {
       try {
         const response = await axios.get("/api/progress");
-        setProgressData(response.data.data);
+        const data = response.data.data;
+
+        // Check if data is valid; if not, reset to 0
+        setProgressData({
+          totalHabitsCreated: data.totalHabitsCreated || 0,
+          totalHabitsCompleted: data.totalHabitsCompleted || 0,
+          dailyProgress: data.dailyProgress || 0,
+          weeklyProgress: data.weeklyProgress || 0,
+          bestStreak: data.bestStreak || { count: 0, habits: "", habitNames: [] },
+          currentActiveStreaks: data.currentActiveStreaks || 0,
+        });
       } catch (error) {
         console.error("Failed to fetch progress data:", error);
         toast.error("Unable to load progress data.");
+        // Reset to 0 in case of an error
+        setProgressData({
+          totalHabitsCreated: 0,
+          totalHabitsCompleted: 0,
+          dailyProgress: 0,
+          weeklyProgress: 0,
+          bestStreak: { count: 0, habits: "", habitNames: [] },
+          currentActiveStreaks: 0,
+        });
       }
     };
 
@@ -32,11 +50,11 @@ export default function ProgressPage() {
   }, []);
 
   return (
-    <main className=" w-full flex flex-col gap-2">
-      <section className=" ml-[49px] mr-[79px] flex-col justify-between my-7">
+    <main className="w-full flex flex-col gap-2">
+      <section className="ml-[49px] mr-[79px] flex-col justify-between my-7">
         <div className="top flex justify-between">
           <div className="greeting flex items-center gap-3">
-            <h1 className=" font-outfit font-bold text-[70px]">
+            <h1 className="font-outfit font-bold text-[70px]">
               Analyze your <span className="text-[#A0FFBA]">Progress</span>
             </h1>
           </div>
