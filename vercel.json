@@ -1,12 +1,4 @@
 {
-    "functions": {
-      "api/jobs/sendreminders": {
-        "maxDuration": 20
-      },
-      "api/jobs/sendalerts": {
-        "maxDuration": 20
-      }
-    },
     "crons": [
       {
         "path": "/api/jobs/sendreminders",
