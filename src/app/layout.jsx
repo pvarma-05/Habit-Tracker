@@ -1,6 +1,7 @@
 import "./globals.css";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import { Outfit, Poppins, Inter } from "next/font/google";
-import  { Toaster } from "react-hot-toast";
+import { Toaster } from "react-hot-toast";
 
 const outfit = Outfit({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -30,7 +31,8 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="scrollbar-thin scrollbar-thumb-[#A0FFBA] scrollbar-track-[#263238] ">
       <body className={`${outfit.variable} ${poppins.variable} ${inter.variable} antialiased`}>
-      <Toaster
+        <SpeedInsights />
+        <Toaster
           position="top-center"
           reverseOrder={true}
           toastOptions={{
