@@ -1,9 +1,9 @@
 {
     "functions": {
-      "api/jobs/sendreminders.js": {
+      "api/jobs/sendreminders": {
         "maxDuration": 20
       },
-      "api/jobs/sendalerts.js": {
+      "api/jobs/sendalerts": {
         "maxDuration": 20
       }
     },
