@@ -1,21 +1,12 @@
 {
-    "functions": {
-      "api/jobs/sendreminders.js": {
-        "maxDuration": 60
-      },
-      "api/jobs/sendalerts.js": {
-        "maxDuration": 60
-      }
-    },
     "crons": [
-      {
-        "path": "/api/jobs/sendreminders",
-        "schedule": "0 9 * * *"
-      },
-      {
-        "path": "/api/jobs/sendalerts",
-        "schedule": "0 21 * * *"
-      }
+        {
+            "path": "/api/jobs/sendreminders",
+            "schedule": "0 9 * * *"
+        },
+        {
+            "path": "/api/jobs/sendalerts",
+            "schedule": "0 21 * * *"
+        }
     ]
-  }
-  
+}
