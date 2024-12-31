@@ -1,6 +1,7 @@
 import { connect } from "@/config/config";
 import User from "@/models/userModel";
 import Habit from "@/models/habitModel";
+import Notification from "@/models/notificationModel";
 import { sendMail } from "@/lib/sendMail";
 import { NextResponse } from "next/server";
 
@@ -100,9 +101,17 @@ async function sendEmailsToAllUsers() {
 
       await sendMail(user.email, subject, htmlContent);
       console.log(`Email sent to ${user.email}`);
+
+      // Create a notification in the database
+      await Notification.create({
+        userId: user._id,
+        type: "Reminder",
+      });
+
+      console.log(`Notification created for user ${user._id}`);
     }
 
-    console.log("Emails sent successfully.");
+    console.log("Emails sent and notifications created successfully.");
   } catch (error) {
     console.error("Error sending emails:", error.message);
   }

@@ -1,6 +1,7 @@
 import { connect } from "@/config/config";
 import User from "@/models/userModel";
 import Habit from "@/models/habitModel";
+import Notification from "@/models/notificationModel";
 import { sendMail } from "@/lib/sendMail";
 import { NextResponse } from "next/server";
 
@@ -58,7 +59,7 @@ async function sendAlertsToAllUsers() {
             You don't have any habits set up. Add some to start tracking your progress!
           </p>
         `;
-        bgColor = "#FFDD59"; // A soft yellow color for no habits
+        bgColor = "#FFDD59";
         subject = "No Habits Set Up";
       } else if (
         habits.daily.length === 0 &&
@@ -118,9 +119,18 @@ async function sendAlertsToAllUsers() {
 
       await sendMail(user.email, subject, htmlContent);
       console.log(`Alert email sent to ${user.email}`);
+
+      const notification = new Notification({
+        userId: user._id,
+        type: "Alert",
+        sentAt: new Date(),
+      });
+
+      await notification.save();
+      console.log(`Notification created for user ${user.email}`);
     }
 
-    console.log("Alert emails sent successfully.");
+    console.log("Alert emails and notifications sent successfully.");
   } catch (error) {
     console.log("Error sending alert emails:", error.message);
   }
