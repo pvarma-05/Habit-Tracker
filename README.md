@@ -1,100 +1,68 @@
-# Habit Tracker Web App
+# Habit Tracker
 
-This is a **Habit Tracker Web App** that allows users to track their habits, set goals, receive reminders, and monitor their progress. The app features a personalized dashboard, habit tracking, and detailed progress reports.
+## 🌐 Overview
+The Habit Tracker is a web application designed to help users build and maintain positive habits. It allows users to track daily habits, view progress, and receive reminders and alerts to stay consistent with their goals.
 
-## Features
-
-- **User Registration and Login**: Users can create an account, log in, and track their habits.
-- **Goal Tracking**: Set daily, weekly, and long-term goals.
-- **Notifications**: Receive email notifications for daily goals and reminders for incomplete tasks.
-- **Progress Dashboard**: View progress through charts and historical tracking.
-- **Customizable Habit Categories**: Users can customize habit categories and set priorities.
-- **Integration with Google Calendar**: Sync reminders with Google Calendar.
-- **User Profile & Settings**: Manage user details and account settings.
-
-## Tech Stack
-
-- **Frontend & Backend**: NEXT.js
+## 🛠️ Tech Stack
+- **Frontend & Backend**: Next.js
+- **Styling**: Tailwind CSS
+- **Email Service**: Nodemailer
+- **Authentication**: JWT (JSON Web Token)
 - **Database**: MongoDB
-- **Authentication**: JWT
-- **Notifications**: Email (via Nodemailer)
-- **APIs**: Google Calendar API
 
-## Live Demo
+## 📋 Features
+- **Daily Reminder**: Sends an email at 8 AM listing all pending habits for the day.
+- **Daily Alert**: Sends an email at 8 PM if habits remain incomplete.
+- **Progress Tracking**: Visualize daily progress using a progress bar.
+- **Notifications**: Displays real-time notifications for habit updates and reminders.
+- **Pending & Completed Goals**: Categorized views for habits yet to be completed and those already accomplished.
 
-Will Provide Soon
+## 🤖 Features to Add in Future
+1. **Link with Google Calendar**: Sync habits with Google Calendar for better scheduling and reminders.
+2. **Profile Picture Customization**: Allow users to upload and update their profile pictures.
+3. **Habits Tag Customization**: Enable users to tag and categorize their habits for better organization.
+4. **Responsive Design**: Optimized for use on desktops, tablets, and mobile devices.
 
-## Figma Design
+## ⚙️ Live Demo
+Check out the live demo of the Habit Tracker [here](https://pvarma-habit-tracker.vercel.app).
 
-You can view the design mockups of the app on Figma: [Figma Design File Link](https://www.figma.com/design/wxscjao9Nv6w63dh9uLPhN/Habit-Tracker?node-id=0-1&t=VHEuQB8VNXxuNIKb-1)
+## 📝 Figma Design
+You can find the design prototype on Figma [here](https://www.figma.com/design/wxscjao9Nv6w63dh9uLPhN/Habit-Tracker?node-id=0-1&t=HxC3g2AsFCEAKoNC-1).
 
-## Installation
+## 🚀 Getting Started
 
-Follow these steps to set up the project locally:
-
-1. **Clone the repository**:
-
-    ```bash
-    git clone https://github.com/pvarma-05/Habit-Tracker.git
-    cd habit-tracker
-    ```
-
-2. **Install dependencies**:
-
-    ```bash
-    npm install
-    ```
-
-3. **Set up environment variables**:
-   
-   Create a `.env` file in the root of the project and add the following variables:
-
-    ```bash
-    MONGO_URI=your-mongo-uri
-    JWT_SECRET=your-jwt_secret
-    EMAIL_USER=your-service-email
-    EMAIL_PASS=your-service-password
-    ```
-
-4. **Run the development server**:
-
-    ```bash
-    npm run dev
-    ```
-
-5. **Visit**: [http://localhost:3000](http://localhost:3000) in your browser.
-
-## Usage
-
-Once the app is running locally:
-
-1. **Sign up** to create a new user account.
-2. **Log in** to access the Habit Tracker Dashboard.
-3. **Set new habits** and track your progress.
-4. **Customize notifications** to receive reminders about your goals.
-5. **View progress** through the dashboard with historical data and charts.
+### Installation Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/pvarma-05/Habit-Tracker.git
+   ```
+2. Navigate to the project directory:
+   ```bash
+   cd habit-tracker
+   ```
+3. Install dependencies:
+   ```bash
+   npm install
+   ```
+4. Set up environment variables:
+   Create a `.env.local` file and include the following:
+   ```env
+   MONGO_URI=your_mongo-uri
+   JWT_SECRET=your_jwt_secret
+   EMAIL_USER=your_email
+   EMAIL_PASS=your_password
+   CRON_SECRET=your_cron_secret
+   ```
+5. Run the development server:
+   ```bash
+   npm run dev
+   ```
+6. Open your browser and navigate to `http://localhost:3000` to access the application.
 
 ## Contributing
-
 Contributions are welcome! If you have suggestions or want to add features, feel free to fork the repo and create a PR.
 
-<!-- ### Steps for contributing:
-1. Fork the repository.
-2. Create a new branch for your changes.
-3. Commit your changes.
-4. Push to your forked repository.
-5. Create a pull request with a description of your changes. -->
-
 ## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-- Thanks to [Next.js](https://nextjs.org/) for making development fast and simple.
-- Thanks to [Figma](https://www.figma.com/) for providing the design tool.
-- Special thanks to anyone who contributed to or tested the app.
-
----
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Made with ❤️ by Pradeep Varma
