@@ -78,6 +78,7 @@ export default function NotificationSettingsPage() {
                     </p>
                 </div>
             </section>
+            <br />
             <section className="ml-[49px] mr-[79px] flex-col justify-between my-10 rounded-lg">
                 <div className="flex flex-col gap-7">
                     <div className="flex flex-col gap-2 h-[72px] w-2/3 rounded-xl p-3 font-poppins text-sm bg-[#333F4E] text-white">
@@ -106,9 +107,8 @@ export default function NotificationSettingsPage() {
                     </div>
                     <div className="flex gap-5">
                         <button
-                            className={`bg-[#A0FFBA] rounded-md text-black font-outfit text-lg font-semibold h-[50px] w-[90px] ${
-                                isSubmitting ? "opacity-50 cursor-not-allowed" : ""
-                            }`}
+                            className={`bg-[#A0FFBA] rounded-md text-black font-outfit text-lg font-semibold h-[50px] w-[90px] ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""
+                                }`}
                             onClick={handleSubmit}
                             disabled={isSubmitting}
                         >
@@ -122,6 +122,23 @@ export default function NotificationSettingsPage() {
                             </button>
                         </Link>
                     </div>
+                </div>
+            </section>
+            <section className="ml-[49px] mr-[79px] my-7">
+                <div className="bg-yellow-500 font-outfit text-black p-4 rounded-md mb-4">
+                    <p>
+                        Even if you update the time according to your need, the mails will be sent
+                        by default at <b>9:00 AM</b> (reminder) and <b>9:00 PM</b> (alert).
+                    </p>
+                    <p>
+                        <strong>Reason:</strong> Free Vercel Cron Job has a limit of only 2 Jobs and executes only 1 time.
+                    </p>
+                </div>
+                <div className="bg-red-500 font-outfit text-black p-4 rounded-md">
+                    <p>
+                        This application uses a free Vercel cron job to deliver the emails. As a result,
+                        the reminder or alert mail may sometimes be delayed.
+                    </p>
                 </div>
             </section>
         </main>

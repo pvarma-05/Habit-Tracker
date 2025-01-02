@@ -22,7 +22,6 @@ export default function ProgressPage() {
         const response = await axios.get("/api/progress");
         const data = response.data.data;
 
-        // Check if data is valid; if not, reset to 0
         setProgressData({
           totalHabitsCreated: data.totalHabitsCreated || 0,
           totalHabitsCompleted: data.totalHabitsCompleted || 0,
@@ -34,7 +33,7 @@ export default function ProgressPage() {
       } catch (error) {
         console.error("Failed to fetch progress data:", error);
         toast.error("Unable to load progress data.");
-        // Reset to 0 in case of an error
+  
         setProgressData({
           totalHabitsCreated: 0,
           totalHabitsCompleted: 0,

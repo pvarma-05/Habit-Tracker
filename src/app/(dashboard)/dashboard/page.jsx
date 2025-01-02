@@ -50,9 +50,24 @@ export default function DashboardPage() {
     fetchDashboardData();
   }, []);
 
+  const renderItems = (items, type) => {
+    const displayedItems = items.slice(0, 3);
+    return (
+      <>
+        {displayedItems.map((item, index) => (
+          <p key={index} className="font-outfit text-lg">{type === "notifications" ? item.message : item.name}</p>
+        ))}
+        {items.length > 3 && (
+          <Link href={`/${type}`}>
+            <p className="text-[#A0FFBA] font-outfit text-sm cursor-pointer">View More</p>
+          </Link>
+        )}
+      </>
+    );
+  };
+
   return (
     <main className="w-full">
-      {/* Top Section */}
       <section className="ml-[49px] mr-[79px] flex-col justify-between my-7">
         <div className="top flex justify-between">
           <div className="greeting flex items-center gap-3">
@@ -82,7 +97,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-col gap-5">
                 {habits.daily.length ? (
-                  habits.daily.map((habit, index) => <p key={index} className="font-outfit text-lg">{habit.name}</p>)
+                  renderItems(habits.daily, "pending")
                 ) : (
                   <p className="font-outfit text-lg text-gray-400">No pending goals for today</p>
                 )}
@@ -98,9 +113,12 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-col gap-5">
                 {habits.completed.length ? (
-                  habits.completed.map((habit, index) => <p key={index} className="font-outfit text-lg">{habit.name}</p>)
+                  renderItems(habits.completed, "completed")
                 ) : (
                   <p className="font-outfit text-lg text-gray-400">No completed goals yet</p>
+                )}
+                {habits.daily.length === 0 && (
+                  <p className="font-outfit text-lg text-[#A0FFBA]">All tasks for the day are completed!</p>
                 )}
               </div>
             </div>
@@ -108,12 +126,12 @@ export default function DashboardPage() {
         </div>
 
         <div className="w-1/2 h-[613px] flex flex-col gap-[30px]">
-          <div className="bg-[#263238] rounded-[18px] w-full h-1/2">
-            <div className="w-full h-60 flex flex-col gap-4 justify-center">
+          <div className="bg-[#263238] rounded-[18px] w-full h-1/2 flex justify-center">
+            <div className="w-11/12 h-full flex flex-col gap-5 justify-center">
               <h1 className="font-outfit text-[30px] text-[#A0FFBA] font-semibold">TODAY'S PROGRESS</h1>
               <div>
                 <p className="font-outfit text-[37px] font-semibold">{progress}%</p>
-                <ProgressBar progress={progress} />
+                <ProgressBar value={progress} />
               </div>
             </div>
           </div>
@@ -125,11 +143,7 @@ export default function DashboardPage() {
             </div>
             <div className="flex flex-col gap-3 mx-5">
               {notifications.length ? (
-                notifications.map((notification, index) => (
-                  <div key={index} className="p-3 bg-gray-800 rounded-md">
-                    <p className="font-outfit text-lg">{notification.message}</p>
-                  </div>
-                ))
+                renderItems(notifications, "notifications")
               ) : (
                 <p className="font-outfit text-lg text-gray-400">No new notifications</p>
               )}

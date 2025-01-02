@@ -27,10 +27,51 @@ export default function Home() {
             <p className="font-poppins text-xl mt-[30px]">Our habit tracker is more than just a checklist. It's your partner in personal growth. Its Designed to keep you always motivated and accountable, it helps you to track your daily habits, analyze your progress, and stay on top of your goals. Whether you're focusing on health, work, or personal development. we've got you covered.</p>
           </div>
         </section>
-        <section className="flex flex-col h-dvh items-center justify-center mt-[50px] ml-[188px] mr-[187px]">
+        <section className="flex flex-col h-dvh items-center justify-center mt-[50px] ml-[188px] mr-[187px] gap-24">
           <div className="font-outfit font-bold text-[82px] leading-tight text-center">
             <h1 ><span className="text-[#A0FFBA]">Features</span> That</h1>
             <h1 >Make You Thrive</h1>
+          </div>
+          <div className="flex justify-between w-full">
+            <div className="card flex flex-col border-2 border-[#A0FFBA] h-[312px] w-[343px] rounded-2xl gap-5">
+              <div className="flex justify-start items-center gap-5">
+                <div className="flex">
+                  <Image draggable={false} width={65} height={65} src={"card1.svg"} alt="card-1 logo" />
+                </div>
+                <div className="flex">
+                  <h1 className="font-poppins font-semibold text-[#A0FFBA] text-[25px] ">Daily Reminders</h1>
+                </div>
+              </div>
+              <div className="flex justify-center items-center mx-3">
+                <p className="font-poppins text-[25px] text-center">Receive personalized emails at 9 AM to kick start your day and 9 PM to stay accountable.</p>
+              </div>
+            </div>
+            <div className="card flex flex-col border-2 border-[#A0FFBA] h-[312px] w-[343px] rounded-2xl gap-5">
+              <div className="flex justify-start items-center gap-5">
+                <div className="flex">
+                  <Image draggable={false} width={65} height={65} src={"card2.svg"} alt="card-2 logo" />
+                </div>
+                <div className="flex">
+                  <h1 className="font-poppins font-semibold text-[#A0FFBA] text-[25px] ">Progress Tracking</h1>
+                </div>
+              </div>
+              <div className="flex justify-center items-center mx-3">
+                <p className="font-poppins text-[25px] text-center">Visualize your streaks, performance trends, and completion rates  with intuitive charts.</p>
+              </div>
+            </div>
+            <div className="card flex flex-col border-2 border-[#A0FFBA] h-[312px] w-[343px] rounded-2xl gap-10">
+              <div className="flex justify-start items-center gap-3">
+                <div className="flex">
+                  <Image draggable={false} width={65} height={65} src={"card3.svg"} alt="card-3 logo" />
+                </div>
+                <div className="flex">
+                  <h1 className="font-poppins font-semibold text-[#A0FFBA] text-[25px] ">Flexible Scheduling</h1>
+                </div>
+              </div>
+              <div className="flex justify-center items-center mx-3">
+                <p className="font-poppins text-[25px] text-center">Set reminders and adjust habits to fit your lifestyle and priorities.</p>
+              </div>
+            </div>
           </div>
         </section>
         <section className="flex flex-col h-dvh items-center justify-center mt-[50px] ml-[188px] mr-[187px]">
