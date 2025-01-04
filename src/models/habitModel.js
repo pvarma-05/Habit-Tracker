@@ -69,27 +69,27 @@ const habitSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-function calculateTimes(recurrence, lastUpdate) {
+function calculateTimes(recurrence) {
   const now = new Date();
-  const updateTime = new Date(lastUpdate);
-  const resetTime = new Date(lastUpdate);
+  const updateTime = new Date();
+  const resetTime = new Date();
 
   switch (recurrence) {
     case "Daily":
-      updateTime.setDate(updateTime.getDate() + 1);
-      resetTime.setDate(resetTime.getDate() + 2);
-      resetTime.setHours(0, 0, 0, 0);
+      updateTime.setDate(now.getDate() + 1);
+      resetTime.setDate(now.getDate() + 1);
+      resetTime.setHours(23, 59, 59, 999); // End of the next day
       break;
     case "Weekly":
-      updateTime.setDate(updateTime.getDate() + 7);
-      resetTime.setDate(resetTime.getDate() + 14);
-      resetTime.setHours(0, 0, 0, 0);
+      updateTime.setDate(now.getDate() + 7);
+      resetTime.setDate(now.getDate() + 7);
+      resetTime.setHours(23, 59, 59, 999);
       break;
     case "Monthly":
-      updateTime.setMonth(updateTime.getMonth() + 1);
-      resetTime.setMonth(resetTime.getMonth() + 2);
-      resetTime.setDate(1);
-      resetTime.setHours(0, 0, 0, 0);
+      updateTime.setMonth(now.getMonth() + 1);
+      resetTime.setMonth(now.getMonth() + 1);
+      resetTime.setDate(new Date(now.getFullYear(), now.getMonth() + 2, 0).getDate()); // Last day of next month
+      resetTime.setHours(23, 59, 59, 999);
       break;
     default:
       throw new Error("Invalid recurrence type");
@@ -98,6 +98,7 @@ function calculateTimes(recurrence, lastUpdate) {
   return { updateTime, resetTime };
 }
 
+
 habitSchema.methods.updateProgress = function () {
   const now = new Date();
 
@@ -105,22 +106,26 @@ habitSchema.methods.updateProgress = function () {
     throw new Error("Cannot update a completed habit.");
   }
 
-  if (this.resetTime && now >= this.resetTime) {
-    this.streakCount = 0;
-  }
-
-  if (this.updateTime && now < this.updateTime) {
-    throw new Error("Progress cannot be updated yet.");
+  if (this.progressUpdatedDate) {
+    const lastUpdateDate = this.progressUpdatedDate;
+    if (
+      now.getDate() === lastUpdateDate.getDate() &&
+      now.getMonth() === lastUpdateDate.getMonth() &&
+      now.getFullYear() === lastUpdateDate.getFullYear()
+    ) {
+      throw new Error("Progress can only be updated on the next day.");
+    }
   }
 
   this.streakCount += 1;
   this.streakMaintained = true;
   this.progressUpdatedDate = now;
 
-  const times = calculateTimes(this.recurrence, now);
+  const times = calculateTimes(this.recurrence);
   this.updateTime = times.updateTime;
   this.resetTime = times.resetTime;
 };
+
 
 habitSchema.methods.completeHabit = function () {
   this.isCompleted = true;
